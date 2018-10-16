@@ -1,8 +1,4 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('curricoo', 'root', 'password', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
 const validTypes = ['video', 'blog', 'article', 'codeRepo', 'book', 'podcast'];
 
 exports.EntryModel = (sequelize) => sequelize.define('entry', {
