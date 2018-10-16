@@ -18,8 +18,7 @@ const sequelize = new Sequelize('curricoo', 'root', 'password', {
 //     console.error('Unable to connect to the database:', err);
 //   });
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var curricoosRouter = require('./routes');
 
 var app = express();
 
@@ -33,8 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', curricoosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
