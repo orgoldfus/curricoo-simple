@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const createCurricoo = require('./curricoo/create');
+const getAllCurricoos = require('./curricoo/getAll');
 
 // Get curricoo with entries
 router.get('/curricoos/:curricooId', function(req, res, next) {
@@ -21,9 +22,7 @@ router.post('/curricoos/:curricooId', function(req, res, next) {
 });
 
 // Get All curricoos
-router.get('/curricoos', function(req, res, next) {
-  res.sendStatus(200);
-});
+router.get('/curricoos', getAllCurricoos);
 
 // Get curricoo's entries
 router.get('/curricoos/:curricooId/entries', function(req, res, next) {

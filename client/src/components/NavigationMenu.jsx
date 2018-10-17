@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { observer, inject }  from 'mobx-react'
+import { withRouter } from 'react-router-dom'
 import { 
   Navbar, 
   Nav, 
@@ -8,11 +10,12 @@ import {
   Button 
 } from 'react-bootstrap/lib'
 
-export default class NavigationMenu extends Component {
+class NavigationMenu extends Component {
   render() {
+    const user = this.props.userStore.user;
     return (
       <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
-        <Navbar.Brand href="#home">Curricoo</Navbar.Brand>
+        <Navbar.Brand href="/">Curricoo</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -20,7 +23,7 @@ export default class NavigationMenu extends Component {
           </Form>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -29,9 +32,15 @@ export default class NavigationMenu extends Component {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link>{ user ? 'Logout' : 'Login' }</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     )
   }
 }
+
+const ConnectedNavigationMenu = inject(
+    'userStore'
+  )(observer(withRouter(NavigationMenu)));
+export default ConnectedNavigationMenu;

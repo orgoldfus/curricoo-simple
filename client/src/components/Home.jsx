@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Button } from 'react-bootstrap/lib';
+// import PropTypes from 'prop-types'
+import { Button, Card, CardColumns } from 'react-bootstrap/lib';
 import CreateCurricooModal from './CreateCuricoo';
+import { observer, inject }  from 'mobx-react'
 
-export default class Home extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+class Home extends Component {
+  // static propTypes = {
+  //   prop: PropTypes
+  // }
 
   constructor(props) {
     super(props);
+
+    props.curricoosStore.fetchCurricoos();
     this.state = {
       isCreateCurricooOpen: false
     };
@@ -22,11 +25,28 @@ export default class Home extends Component {
   showCreateCurricoo = () => {
     this.setState({ isCreateCurricooOpen: true })
   }
+  
+  renderCurricoos = () => {
+    const curricoos = this.props.curricoosStore.curricoos.map(curricoo => 
+      <Card style={{ width: '180px' }}>
+        <Card.Body>
+          <Card.Title>{ curricoo.title }</Card.Title>
+          <Card.Text>{ curricoo.description }</Card.Text>
+          <Card.Link href='#' onClick={() => this.viewCurricoo(curricoo.id)}>Explore</Card.Link>
+        </Card.Body>
+      </Card>
+    )
+
+    return <CardColumns>{curricoos}</CardColumns>;
+  }
+
+  viewCurricoo = curricooId => 
+    this.props.history.push(`/curricoos/${curricooId}`);
 
   render() {
-    const show = this.state.isCreateCurricooOpen;
     return (
       <div>
+        {this.renderCurricoos()}
         <Button 
           variant="success" 
           size="lg" 
@@ -35,10 +55,17 @@ export default class Home extends Component {
           Create a new Curricoo
         </Button>
         <CreateCurricooModal 
-          show={show} 
+          show={this.state.isCreateCurricooOpen} 
           handleClose={this.handleCloseCreateCurricoo}
+          history={this.props.history}
         />
       </div>
     )
   }
 }
+
+const ConnectedHome = inject(
+  'curricoosStore'
+)(observer(Home));
+
+export default ConnectedHome;
