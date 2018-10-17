@@ -1,21 +1,29 @@
 const Sequelize = require('sequelize');
+const uuid = require('uuid/v4');
 
-exports.CurricooModel = (sequelize) => sequelize.define('curricoo', {
+module.exports = (sequelize) => {
+  const Curricoo = sequelize.define('curricoo', {
   id: { 
-    type: Sequelize.STRING,  
-    primaryKey: true,
-    validate: { isUUID: 4 }
+    type: Sequelize.UUID,
+    primaryKey: true
   },
   ownerId: { 
-    type: Sequelize.STRING, 
-    validate: { notNull: true } 
+    type: Sequelize.UUID, 
+    // allowNull: false
   },
   title: { 
     type: Sequelize.STRING, 
-    validate: { notNull: true } 
+    allowNull: false
   },
   description: Sequelize.TEXT
-}, {
-  timestamps: true,
-  deletedAt: false
-});
+  }, {
+    timestamps: true,
+    deletedAt: false
+  });
+
+  Curricoo.beforeCreate(curricoo => {
+    return curricoo.id = uuid();
+  });
+
+  return Curricoo;
+}

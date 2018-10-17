@@ -3,20 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('curricoo', 'root', 'password', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
-
-// sequelize
-//   .authenticate()
-//   .then(() => {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch(err => {
-//     console.error('Unable to connect to the database:', err);
-//   });
 
 var curricoosRouter = require('./routes');
 
@@ -35,7 +21,7 @@ app.use(express.static(path.join(__dirname, '/client/build/')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
-app.use('/', curricoosRouter);
+app.use('/api', curricoosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
