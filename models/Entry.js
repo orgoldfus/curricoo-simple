@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const uuid = require('uuid/v4');
 const CurricooModel = require('./Curricoo');
-const validTypes = ['video', 'blog', 'article', 'codeRepo', 'book', 'podcast'];
+const validTypes = ['Video', 'Blog', 'Article', 'Code Repo', 'Book', 'Podcast'];
 
 module.exports = (sequelize) => {
   const Entry = sequelize.define('entry', {
@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
       type: Sequelize.UUID,
       primaryKey: true
     },
+    index: Sequelize.INTEGER,
     title: { 
       type: Sequelize.STRING, 
       allowNull: false
