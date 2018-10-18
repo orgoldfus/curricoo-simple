@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const createCurricoo = require('./curricoo/create');
 const getAllCurricoos = require('./curricoo/getAll');
+const createEntry = require('./entry/create');
+const getAllCurricooEntries = require('./entry/getAll');
 
 // Get curricoo with entries
 router.get('/curricoos/:curricooId', function(req, res, next) {
@@ -25,14 +27,10 @@ router.post('/curricoos/:curricooId', function(req, res, next) {
 router.get('/curricoos', getAllCurricoos);
 
 // Get curricoo's entries
-router.get('/curricoos/:curricooId/entries', function(req, res, next) {
-  res.sendStatus(200);
-});
+router.get('/curricoos/:curricooId/entries', getAllCurricooEntries);
 
 // Create a new entry
-router.post('/curricoos/:curricooId/entries', function(req, res, next) {
-  res.sendStatus(200);
-});
+router.post('/curricoos/:curricooId/entries', createEntry);
 
 // Delete an entry
 router.delete('/curricoos/:curricooId/entries/:entryId', function(req, res, next) {

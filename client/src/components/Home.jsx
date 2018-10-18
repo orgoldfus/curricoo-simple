@@ -12,7 +12,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    props.curricoosStore.fetchCurricoos();
+    if (props.curricoosStore.curricoos.length === 0) {
+      props.curricoosStore.fetchCurricoos();
+    }
+
     this.state = {
       isCreateCurricooOpen: false
     };
@@ -28,7 +31,7 @@ class Home extends Component {
   
   renderCurricoos = () => {
     const curricoos = this.props.curricoosStore.curricoos.map(curricoo => 
-      <Card style={{ width: '180px' }}>
+      <Card style={{ width: '18rem', margin: '1rem' }}>
         <Card.Body>
           <Card.Title>{ curricoo.title }</Card.Title>
           <Card.Text>{ curricoo.description }</Card.Text>

@@ -15,7 +15,12 @@ class NavigationMenu extends Component {
     const user = this.props.userStore.user;
     return (
       <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
-        <Navbar.Brand href="/">Curricoo</Navbar.Brand>
+        <Navbar.Brand
+          href="#" 
+          onClick={() => this.props.history.push('/')}
+        >
+          Curricoo
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -23,7 +28,12 @@ class NavigationMenu extends Component {
           </Form>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link
+              href="#" 
+              onClick={() => this.props.history.push('/')}
+            >
+              Home
+            </Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
