@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap/lib'
+import React, { Component } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap/lib';
 import { withAuthenticator } from 'aws-amplify-react';
-import { inject }  from 'mobx-react'
+import { inject }  from 'mobx-react';
 
 class CreateCuricoo extends Component {
   handleSubmit = evt => {
@@ -11,7 +11,7 @@ class CreateCuricoo extends Component {
       title: this.title.value,
       description: this.description.value,
       ownerId: this.props.userStore.user.attributes.sub
-    }
+    };
 
     // TODO: handle properly
     this.props.curricoosStore.createCurricoo(curricooData)
@@ -70,7 +70,7 @@ class CreateCuricoo extends Component {
           </Modal.Footer>
         </Form>
       </Modal>
-    )
+    );
   }
 }
 

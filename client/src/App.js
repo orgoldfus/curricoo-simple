@@ -4,7 +4,7 @@ import NavigationMenu from './components/NavigationMenu';
 import Home from './components/Home';
 import ViewCurricoo from './components/ViewCurricoo';
 import 'bootstrap/dist/css/bootstrap.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {

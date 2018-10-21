@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap/lib'
-import { withAuthenticator } from 'aws-amplify-react'
-import { inject }  from 'mobx-react'
+import React, { Component } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap/lib';
+import { withAuthenticator } from 'aws-amplify-react';
+import { inject }  from 'mobx-react';
 const ENTRY_TYPES = ['Video', 'Blog', 'Article', 'Code Repo', 'Book', 'Podcast'];
 
 class CreateEntry extends Component {
@@ -15,14 +15,12 @@ class CreateEntry extends Component {
       notes: this.notes.value,
       type: this.entryType.value,
       url: this.url.value
-    }
+    };
 
     // TODO: handle properly
     this.props.curricoosStore.createEntry(entryData)
-      .then(success => {
-        if (success) {
-          this.props.handleClose();
-        }
+      .then(() => {
+        this.props.handleClose();
       });
   }
 
@@ -62,7 +60,7 @@ class CreateEntry extends Component {
                 as="select"
                 ref={type => this.entryType = type}
               >
-                { ENTRY_TYPES.map(type => <option>{type}</option>) }
+                { ENTRY_TYPES.map((type, idx) => <option key={idx}>{type}</option>) }
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="createEntry.notes">
@@ -91,7 +89,7 @@ class CreateEntry extends Component {
           </Modal.Footer>
         </Form>
       </Modal>
-    )
+    );
   }
 }
 
