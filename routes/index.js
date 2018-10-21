@@ -3,7 +3,8 @@ const router = express.Router()
 const {
   createCurricoo,
   getAllCurricoos,
-  deleteCurricoo
+  deleteCurricoo,
+  getCurricoo
 } = require('./curricoo')
 const {
   createEntry,
@@ -11,13 +12,9 @@ const {
   getAllCurricooEntries
 } = require('./entry')
 
-// Get curricoo with entries
-router.get('/:curricooId', function(req, res) {
-  res.sendStatus(200)
-})
-
+router.get('/', getAllCurricoos)
 router.post('/', createCurricoo)
-
+router.get('/:curricooId', getCurricoo)
 router.delete('/:curricooId', deleteCurricoo)
 
 // Edit a curricoo
@@ -25,12 +22,8 @@ router.post('/:curricooId', function(req, res) {
   res.sendStatus(200)
 })
 
-router.get('/', getAllCurricoos)
-
 router.get('/:curricooId/entries', getAllCurricooEntries)
-
 router.post('/:curricooId/entries', createEntry)
-
 router.delete('/:curricooId/entries/:entryId', deleteEntry)
 
 // Edit an entry

@@ -7,9 +7,9 @@ import Amplify, { Auth } from 'aws-amplify';
 import awsConfig from './awsConfig';
 import { Provider } from 'mobx-react';
 import { configure, observable, runInAction } from 'mobx';
-import CurricoosStore from './curricooStore';
+import CurricoosStore from './stores/curricooStore';
 
-configure({ enforceActions: 'always' });
+// configure({ enforceActions: 'always' });
 Amplify.configure(awsConfig);
 
 const curricoosStore = new CurricoosStore();

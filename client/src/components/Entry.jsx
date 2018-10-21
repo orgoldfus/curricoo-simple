@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Collapse } from 'react-bootstrap/lib';
+import { Card, Collapse, Button } from 'react-bootstrap/lib';
 
 export default class Entry extends Component {
   constructor(props) {
@@ -32,6 +32,18 @@ export default class Entry extends Component {
               <h3><a href={entry.url}>{ entry.url }</a></h3>
               <p>{ entry.notes }</p>
             </div>
+            {this.props.canEdit && 
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={() => 
+                this.props.handleDelete({
+                  entryId: entry.id, 
+                  curricooId: entry.curricooId
+                })}
+            >
+              Delete
+            </Button>}
           </Card.Body>
         </Collapse>
       </Card>

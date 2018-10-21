@@ -43,8 +43,10 @@ class Home extends Component {
     return <CardColumns>{curricoos}</CardColumns>;
   }
 
-  viewCurricoo = curricooId => 
+  viewCurricoo = curricooId => {
+    this.props.curricoosStore.setCurrentCurricoo(curricooId);
     this.props.history.push(`/curricoos/${curricooId}`);
+  }
 
   render() {
     return (

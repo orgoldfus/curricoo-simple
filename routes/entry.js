@@ -1,4 +1,4 @@
-const { Entry } = require('../../models')
+const { Entry } = require('../models')
 
 async function createEntry (req, res) {
   const entry = await Entry.create(req.body)

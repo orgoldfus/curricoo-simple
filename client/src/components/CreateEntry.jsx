@@ -19,10 +19,8 @@ class CreateEntry extends Component {
 
     // TODO: handle properly
     this.props.curricoosStore.createEntry(entryData)
-      .then(success => {
-        if (success) {
-          this.props.handleClose();
-        }
+      .then(() => {
+        this.props.handleClose();
       });
   }
 
@@ -62,7 +60,7 @@ class CreateEntry extends Component {
                 as="select"
                 ref={type => this.entryType = type}
               >
-                { ENTRY_TYPES.map(type => <option>{type}</option>) }
+                { ENTRY_TYPES.map((type, idx) => <option key={idx}>{type}</option>) }
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="createEntry.notes">

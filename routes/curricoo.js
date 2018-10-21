@@ -1,4 +1,4 @@
-const { Curricoo } = require('../../models')
+const { Curricoo } = require('../models')
 
 async function createCurricoo (req, res) {
   const curricoo = await Curricoo.create(req.body)
@@ -14,6 +14,14 @@ async function deleteCurricoo (req, res) {
   return res.status(200).send('Curricoo deleted successfully')
 }
 
+async function getCurricoo (req, res) {
+  const curricoo = await Curricoo.find({
+    where: { id: req.params.curricooId } 
+  })
+
+  return res.status(200).json(curricoo)
+}
+
 async function getAllCurricoos (req, res) {
   const curricoos = await Curricoo.findAll()
 
@@ -21,6 +29,7 @@ async function getAllCurricoos (req, res) {
 }
 
 module.exports = {
+  getCurricoo,
   createCurricoo,
   deleteCurricoo,
   getAllCurricoos
