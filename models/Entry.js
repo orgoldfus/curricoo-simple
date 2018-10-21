@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const uuid = require('uuid/v4');
-const CurricooModel = require('./Curricoo');
-const validTypes = ['Video', 'Blog', 'Article', 'Code Repo', 'Book', 'Podcast'];
+const Sequelize = require('sequelize')
+const uuid = require('uuid/v4')
+const CurricooModel = require('./Curricoo')
+const validTypes = ['Video', 'Blog', 'Article', 'Code Repo', 'Book', 'Podcast']
 
 module.exports = (sequelize) => {
   const Entry = sequelize.define('entry', {
@@ -28,14 +28,14 @@ module.exports = (sequelize) => {
   }, {
     timestamps: true,
     deletedAt: false
-  });
+  })
 
-  const Curricoo = CurricooModel(sequelize);
-  Entry.belongsTo(Curricoo);
+  const Curricoo = CurricooModel(sequelize)
+  Entry.belongsTo(Curricoo)
 
   Entry.beforeCreate(entry => {
-    return entry.id = uuid();
-  });
+    return entry.id = uuid()
+  })
 
-  return Entry;
+  return Entry
 }

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types'
 import { Button, Card, CardColumns } from 'react-bootstrap/lib';
 import CreateCurricooModal from './CreateCuricoo';
-import { observer, inject }  from 'mobx-react'
+import { observer, inject }  from 'mobx-react';
 
 class Home extends Component {
   // static propTypes = {
@@ -22,23 +22,23 @@ class Home extends Component {
   }
 
   handleCloseCreateCurricoo = () => {
-    this.setState({ isCreateCurricooOpen: false })
+    this.setState({ isCreateCurricooOpen: false });
   }
 
   showCreateCurricoo = () => {
-    this.setState({ isCreateCurricooOpen: true })
+    this.setState({ isCreateCurricooOpen: true });
   }
   
   renderCurricoos = () => {
     const curricoos = this.props.curricoosStore.curricoos.map(curricoo => 
-      <Card style={{ width: '18rem', margin: '1rem' }}>
+      <Card style={{ width: '18rem', margin: '1rem' }} key={curricoo.id}>
         <Card.Body>
           <Card.Title>{ curricoo.title }</Card.Title>
           <Card.Text>{ curricoo.description }</Card.Text>
           <Card.Link href='#' onClick={() => this.viewCurricoo(curricoo.id)}>Explore</Card.Link>
         </Card.Body>
       </Card>
-    )
+    );
 
     return <CardColumns>{curricoos}</CardColumns>;
   }
@@ -63,7 +63,7 @@ class Home extends Component {
           history={this.props.history}
         />
       </div>
-    )
+    );
   }
 }
 

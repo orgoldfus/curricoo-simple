@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Card, Collapse } from 'react-bootstrap/lib';
 
 export default class Entry extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   
     this.state = {
-       open: false
-    }
+      open: false
+    };
   }
   
   render() {
@@ -35,6 +35,6 @@ export default class Entry extends Component {
           </Card.Body>
         </Collapse>
       </Card>
-    )
+    );
   }
 }

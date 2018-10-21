@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { observer, inject }  from 'mobx-react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { observer, inject }  from 'mobx-react';
+import { withRouter } from 'react-router-dom';
 import { 
   Navbar, 
   Nav, 
@@ -8,7 +8,7 @@ import {
   Form, 
   FormControl, 
   Button 
-} from 'react-bootstrap/lib'
+} from 'react-bootstrap/lib';
 
 class NavigationMenu extends Component {
   render() {
@@ -23,9 +23,9 @@ class NavigationMenu extends Component {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form>
+          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          <Button variant="outline-light">Search</Button>
+        </Form>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
             <Nav.Link
@@ -46,11 +46,11 @@ class NavigationMenu extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    )
+    );
   }
 }
 
 const ConnectedNavigationMenu = inject(
-    'userStore'
-  )(observer(withRouter(NavigationMenu)));
+  'userStore'
+)(observer(withRouter(NavigationMenu)));
 export default ConnectedNavigationMenu;

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap/lib'
-import { withAuthenticator } from 'aws-amplify-react'
-import { inject }  from 'mobx-react'
+import React, { Component } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap/lib';
+import { withAuthenticator } from 'aws-amplify-react';
+import { inject }  from 'mobx-react';
 const ENTRY_TYPES = ['Video', 'Blog', 'Article', 'Code Repo', 'Book', 'Podcast'];
 
 class CreateEntry extends Component {
@@ -15,7 +15,7 @@ class CreateEntry extends Component {
       notes: this.notes.value,
       type: this.entryType.value,
       url: this.url.value
-    }
+    };
 
     // TODO: handle properly
     this.props.curricoosStore.createEntry(entryData)
@@ -91,7 +91,7 @@ class CreateEntry extends Component {
           </Modal.Footer>
         </Form>
       </Modal>
-    )
+    );
   }
 }
 
