@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "curricoo",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

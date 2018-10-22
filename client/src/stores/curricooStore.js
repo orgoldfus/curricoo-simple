@@ -93,4 +93,4 @@ decorate(CurricoosStore, {
   deleteEntry: action
 });
 
-export default CurricoosStore;
+export default new CurricoosStore();

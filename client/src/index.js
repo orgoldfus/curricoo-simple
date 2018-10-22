@@ -1,28 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import 'bootstrap/dist/css/bootstrap.css';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsConfig from './awsConfig';
 import { Provider } from 'mobx-react';
-import { configure, observable, runInAction } from 'mobx';
-import CurricoosStore from './stores/curricooStore';
+// import { configure } from 'mobx';
+import authStore from './stores/authStore';
+import userStore from './stores/userStore';
+import curricoosStore from './stores/curricooStore';
+import promiseFinally from 'promise.prototype.finally';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+
+promiseFinally.shim();
 
 // configure({ enforceActions: 'always' });
 Amplify.configure(awsConfig);
 
-const curricoosStore = new CurricoosStore();
-const userStore = observable({ user: null });
-Auth.currentAuthenticatedUser()
-  .then(user => runInAction(() => userStore.user = user));
+const stores = {
+  curricoosStore,
+  authStore,
+  userStore
+};
 
 ReactDOM.render(
-  <Provider
-    userStore={userStore}
-    curricoosStore={curricoosStore}
-  >
-    <App />
+  <Provider {...stores}>
+    <Router>
+      <App />
+    </Router>
   </Provider>, 
   document.getElementById('root')
 );

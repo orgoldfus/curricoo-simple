@@ -10,7 +10,6 @@ class ViewCurricoo extends Component {
     super(props);
 
     const { curricooId } = props.match.params;
-    let canEdit = false;
 
     if(!props.curricoosStore.currentCurricooId) {
       props.curricoosStore.setCurrentCurricoo(curricooId);
@@ -18,15 +17,10 @@ class ViewCurricoo extends Component {
 
     if(!props.curricoosStore.currentCurricoo) {
       props.curricoosStore.fetchCurricoo({ curricooId });
-    } else {
-      canEdit = props.userStore.user && 
-        props.curricoosStore.currentCurricoo.ownerId ===  
-        props.userStore.user.attributes.sub;
     }
 
     this.state = {
-      isCreateEntryOpen: false,
-      canEdit
+      isCreateEntryOpen: false
     };
   }
 
@@ -41,7 +35,7 @@ class ViewCurricoo extends Component {
   deleteCurricoo = () => {
     const { curricoo } = this.state;
     this.props.curricoosStore.deleteCurricoo({ curricooId: curricoo.id });
-    this.props.history.push('/');
+    this.props.history.replace('/');
   }
 
   handleDelete = (entryData) => {
@@ -49,11 +43,13 @@ class ViewCurricoo extends Component {
   }
   
   render() {
-    const { canEdit } = this.state;
-    const { entries, currentCurricoo: curricoo } = this.props.curricoosStore;
+    const { userStore, curricoosStore } = this.props;
+    const { entries, currentCurricoo: curricoo } = curricoosStore;
+    const canEdit = userStore.isUserConnected && 
+      curricoo.ownerId === userStore.currentUser.attributes.sub;
 
     return (
-      !curricoo ? <h1>Not found</h1> :
+      !curricoo ? <h1>Curricoo was not found :(</h1> :
         <div>
           <h1>{curricoo.title}</h1>
           <p>{curricoo.description}</p>

@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap/lib';
-import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthentication } from '../utils/auth';
 import { inject }  from 'mobx-react';
 
 class CreateCuricoo extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
+    const {
+      userStore, 
+      curricoosStore, 
+      handleClose, 
+      history
+    } = this.props;
     
     const curricooData = {
       title: this.title.value,
       description: this.description.value,
-      ownerId: this.props.userStore.user.attributes.sub
+      ownerId: userStore.currentUser.attributes.sub
     };
 
     // TODO: handle properly
-    this.props.curricoosStore.createCurricoo(curricooData)
+    curricoosStore.createCurricoo(curricooData)
       .then(curricooId => {
         if (curricooId) {
-          this.props.handleClose();
-          this.props.history.push(`/curricoos/${curricooId}`);
+          handleClose();
+          history.push(`/curricoos/${curricooId}`);
         }
       });
   }
@@ -78,4 +84,4 @@ const ConnectedCreateCuricoo = inject(
   'curricoosStore',
   'userStore'
 )(CreateCuricoo);
-export default withAuthenticator(ConnectedCreateCuricoo);
+export default withAuthentication(ConnectedCreateCuricoo);
