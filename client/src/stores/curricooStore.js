@@ -22,7 +22,7 @@ class CurricoosStore {
 
   async fetchCurricoos() {
     const curricoos = await API.fetchCurricoos();
-
+    
     this.curricoos.length = 0;
     curricoos.map(curricoo => 
       runInAction(() => this.curricoos.push(curricoo))

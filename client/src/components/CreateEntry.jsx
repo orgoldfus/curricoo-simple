@@ -11,10 +11,10 @@ class CreateEntry extends Component {
     const entryData = {
       curricooId: this.props.curricooId,
       index: this.props.newIndex,
-      title: this.title.value,
-      notes: this.notes.value,
+      title: this.title.value.trim(),
+      notes: this.notes.value.trim(),
       type: this.entryType.value,
-      url: this.url.value
+      url: this.url.value.trim()
     };
 
     // TODO: handle properly

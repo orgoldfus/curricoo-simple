@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, CardColumns } from 'react-bootstrap/lib';
+import { Button, CardColumns } from 'react-bootstrap/lib';
 import CreateCurricooModal from './CreateCuricoo';
+import CurricooCard from './CurricooCard';
 import { observer, inject }  from 'mobx-react';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
-    if (props.curricoosStore.curricoos.length === 0) {
+    if (props.curricoosStore.curricoos.length <= 1) {
       props.curricoosStore.fetchCurricoos();
     }
 
@@ -24,20 +25,6 @@ class Home extends Component {
   showCreateCurricoo = () => {
     this.setState({ isCreateCurricooOpen: true });
   }
-  
-  renderCurricoos = () => {
-    const curricoos = this.props.curricoosStore.curricoos.map(curricoo => 
-      <Card style={{ width: '18rem', margin: '1rem' }} key={curricoo.id}>
-        <Card.Body>
-          <Card.Title>{ curricoo.title }</Card.Title>
-          <Card.Text>{ curricoo.description }</Card.Text>
-          <Card.Link href='#' onClick={() => this.viewCurricoo(curricoo.id)}>Explore</Card.Link>
-        </Card.Body>
-      </Card>
-    );
-
-    return <CardColumns>{curricoos}</CardColumns>;
-  }
 
   viewCurricoo = curricooId => {
     this.props.curricoosStore.setCurrentCurricoo(curricooId);
@@ -45,11 +32,19 @@ class Home extends Component {
   }
 
   render() {
-    const { userStore, history } = this.props;
+    const { userStore, curricoosStore, history } = this.props;
     const { isCreateCurricooOpen } = this.state;
     return (
-      <div>
-        {this.renderCurricoos()}
+      <div style={{ backgroundColor: '#f4f7f9', padding: '1.5rem 1rem' }}>
+        <CardColumns>
+          {curricoosStore.curricoos.map(curricoo => 
+            <CurricooCard
+              key={curricoo.id}
+              curricoo={curricoo}
+              viewCurricoo={this.viewCurricoo}
+            />
+          )}
+        </CardColumns>
         <Button 
           variant="success" 
           size="lg" 

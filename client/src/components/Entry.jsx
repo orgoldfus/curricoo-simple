@@ -29,7 +29,15 @@ export default class Entry extends Component {
             <div id={entry.id}>
               <h1>{ entry.title }</h1>
               <h3>{ entry.type }</h3>
-              <h3><a href={entry.url}>{ entry.url }</a></h3>
+              <h3>
+                <a 
+                  href={entry.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  { entry.url }
+                </a>
+              </h3>
               <p>{ entry.notes }</p>
             </div>
             {this.props.canEdit && 

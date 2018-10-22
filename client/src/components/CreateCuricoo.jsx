@@ -14,8 +14,8 @@ class CreateCuricoo extends Component {
     } = this.props;
     
     const curricooData = {
-      title: this.title.value,
-      description: this.description.value,
+      title: this.title.value.trim(),
+      description: this.description.value.trim(),
       ownerId: userStore.currentUser.attributes.sub
     };
 

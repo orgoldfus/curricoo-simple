@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
 import Amplify from 'aws-amplify';
-import awsConfig from './awsConfig';
 import { Provider } from 'mobx-react';
-// import { configure } from 'mobx';
-import authStore from './stores/authStore';
-import userStore from './stores/userStore';
-import curricoosStore from './stores/curricooStore';
 import promiseFinally from 'promise.prototype.finally';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import * as serviceWorker from './serviceWorker';
+import curricoosStore from './stores/curricooStore';
+import authStore from './stores/authStore';
+import userStore from './stores/userStore';
+import awsConfig from './awsConfig';
+import App from './components/App';
+// import { configure } from 'mobx';
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
 promiseFinally.shim();
 

@@ -5,6 +5,13 @@ import CreateEntryModal from './CreateEntry';
 import { Button } from 'react-bootstrap/lib';
 import Entry from './Entry';
 
+const divStyle = {
+  maxWidth: '83.75rem',
+  marginLeft: 'auto', 
+  marginRight: 'auto',
+  paddingTop: '1.5rem'
+};
+
 class ViewCurricoo extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +57,7 @@ class ViewCurricoo extends Component {
 
     return (
       !curricoo ? <h1>Curricoo was not found :(</h1> :
-        <div>
+        <div style={divStyle}>
           <h1>{curricoo.title}</h1>
           <p>{curricoo.description}</p>
           { entries.map(entry => (
