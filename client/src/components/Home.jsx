@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import { Button, Card, CardColumns } from 'react-bootstrap/lib';
 import CreateCurricooModal from './CreateCuricoo';
 import { observer, inject }  from 'mobx-react';
 
 class Home extends Component {
-  // static propTypes = {
-  //   prop: PropTypes
-  // }
-
   constructor(props) {
     super(props);
 
@@ -49,6 +45,8 @@ class Home extends Component {
   }
 
   render() {
+    const { userStore, history } = this.props;
+    const { isCreateCurricooOpen } = this.state;
     return (
       <div>
         {this.renderCurricoos()}
@@ -59,18 +57,26 @@ class Home extends Component {
         >
           Create a new Curricoo
         </Button>
+        {(userStore.isUserConnected || isCreateCurricooOpen) && 
         <CreateCurricooModal 
-          show={this.state.isCreateCurricooOpen} 
+          show={isCreateCurricooOpen} 
           handleClose={this.handleCloseCreateCurricoo}
-          history={this.props.history}
-        />
+          history={history}
+        />}
       </div>
     );
   }
 }
 
+Home.propTypes = {
+  curricoosStore: PropTypes.object,
+  userStore: PropTypes.object,
+  history: PropTypes.object
+};
+
 const ConnectedHome = inject(
-  'curricoosStore'
+  'curricoosStore',
+  'userStore'
 )(observer(Home));
 
 export default ConnectedHome;

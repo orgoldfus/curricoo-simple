@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject }  from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { 
   Navbar, 
   Nav, 
@@ -10,14 +11,13 @@ import {
   Button 
 } from 'react-bootstrap/lib';
 
-class NavigationMenu extends Component {
+class Header extends Component {
   render() {
-    const user = this.props.userStore.user;
     return (
       <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
         <Navbar.Brand
           href="#" 
-          onClick={() => this.props.history.push('/')}
+          onClick={() => this.props.history.replace('/')}
         >
           Curricoo
         </Navbar.Brand>
@@ -28,12 +28,6 @@ class NavigationMenu extends Component {
         </Form>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link
-              href="#" 
-              onClick={() => this.props.history.push('/')}
-            >
-              Home
-            </Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -42,7 +36,18 @@ class NavigationMenu extends Component {
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link>{ user ? 'Logout' : 'Login' }</Nav.Link>
+            { this.props.userStore.isUserConnected
+              ? <Nav.Link
+                onClick={this.props.authStore.logout}
+              >
+                Logout
+              </Nav.Link>
+              : <Nav.Link
+                onClick={() => this.props.history.replace('/login')}
+              >
+                Login
+              </Nav.Link>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -50,7 +55,14 @@ class NavigationMenu extends Component {
   }
 }
 
-const ConnectedNavigationMenu = inject(
-  'userStore'
-)(observer(withRouter(NavigationMenu)));
-export default ConnectedNavigationMenu;
+Header.propTypes = {
+  userStore: PropTypes.object,
+  authStore: PropTypes.object,
+  history: PropTypes.object
+};
+
+const ConnectedHeader = inject(
+  'userStore',
+  'authStore'
+)(observer(Header));
+export default withRouter(ConnectedHeader);
