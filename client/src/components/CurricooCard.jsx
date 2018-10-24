@@ -2,13 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap/lib';
 import { shorten } from '../utils/string';
+import styled from 'styled-components';
+
+const CardWrapper = styled(Card)`
+  max-width: 18rem;
+  max-height: 20rem;
+`;
 
 function CurricooCard({ 
   curricoo: { id, title, description }, 
   viewCurricoo
 }) {
   return (
-    <Card style={{ maxWidth: '18rem', maxHeight: '20rem' }} >
+    <CardWrapper>
       <Card.Body>
         <Card.Title>{ shorten(title, 50) }</Card.Title>
         <Card.Text>{ shorten(description, 200) }</Card.Text>
@@ -20,7 +26,7 @@ function CurricooCard({
           Explore
         </Card.Link>
       </Card.Body>
-    </Card>
+    </CardWrapper>
   );
 }
 
