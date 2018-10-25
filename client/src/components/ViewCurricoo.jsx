@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject }  from 'mobx-react';
-import CreateEntryModal from './CreateEntry';
-import { Button } from 'react-bootstrap/lib';
-import styled from 'styled-components';
-import Entry from './Entry';
-
-const CurricooWrapper = styled.div`
-  max-width: 83.75rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 1.5rem;
-`;
+import { Button, Container } from 'react-bootstrap/lib';
+import {
+  Entry,
+  CreateEntry as CreateEntryModal
+} from '../components';
 
 class ViewCurricoo extends Component {
   constructor(props) {
@@ -57,7 +51,7 @@ class ViewCurricoo extends Component {
     if (curricoosStore.inProgress) return null;
     return (
       !curricoo ? <h1>Curricoo was not found :(</h1> :
-        <CurricooWrapper>
+        <Container>
           <h1>{curricoo.title}</h1>
           <p>{curricoo.description}</p>
           { entries.map(entry => (
@@ -93,7 +87,7 @@ class ViewCurricoo extends Component {
             curricooId={curricoo.id}
             newIndex={this.props.curricoosStore.entries.length + 1}
           />}
-        </CurricooWrapper>
+        </Container>
     );
   }
 }

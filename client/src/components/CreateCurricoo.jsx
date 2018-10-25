@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap/lib';
 import { withAuthentication } from '../utils/auth';
 import { inject }  from 'mobx-react';
 
-class CreateCuricoo extends Component {
+class CreateCurricoo extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const {
@@ -83,5 +83,5 @@ class CreateCuricoo extends Component {
 const ConnectedCreateCuricoo = inject(
   'curricoosStore',
   'userStore'
-)(CreateCuricoo);
+)(CreateCurricoo);
 export default withAuthentication(ConnectedCreateCuricoo);

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, CardColumns } from 'react-bootstrap/lib';
-import CreateCurricooModal from './CreateCuricoo';
-import CurricooCard from './CurricooCard';
 import { observer, inject }  from 'mobx-react';
+import {
+  CurricooCard,
+  CreateCurricoo as CreateCurricooModal
+} from '../components';
 
 class Home extends Component {
   constructor(props) {
