@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap/lib';
 import { shorten } from '../utils/string';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CardWrapper = styled(Card)`
   max-width: 18rem;
@@ -10,21 +11,19 @@ const CardWrapper = styled(Card)`
 `;
 
 function CurricooCard({ 
-  curricoo: { id, title, description }, 
-  viewCurricoo
+  curricoo: { id, title, description }
 }) {
   return (
     <CardWrapper>
       <Card.Body>
         <Card.Title>{ shorten(title, 50) }</Card.Title>
         <Card.Text>{ shorten(description, 200) }</Card.Text>
-        <Card.Link
-          href='#' 
-          onClick={() => viewCurricoo(id)}
+        <Link
+          to={`/curricoos/${id}`}
           style={{ float: 'right', paddingBottom: '0.85rem' }}
         >
           Explore
-        </Card.Link>
+        </Link>
       </Card.Body>
     </CardWrapper>
   );

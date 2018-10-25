@@ -6,6 +6,7 @@ class CurricoosStore {
   curricoos = [];
   entries = [];
   currentCurricooId;
+  inProgress = false;
 
   // Computed
   get currentCurricoo() {
@@ -30,9 +31,16 @@ class CurricoosStore {
   }
 
   async fetchCurricoo(curricooData) {
-    const curricoo = await API.fetchCurricoo(curricooData);
+    this.inProgress = true;
 
-    this.curricoos.push(curricoo);
+    try {
+      const curricoo = await API.fetchCurricoo(curricooData);
+      if (curricoo) {
+        this.curricoos.push(curricoo);
+      }
+    } finally {
+      this.inProgress = false;
+    }
   }
 
   async fetchEntries(curricooData) {
@@ -82,6 +90,7 @@ decorate(CurricoosStore, {
   curricoos: observable,
   entries: observable,
   currentCurricooId: observable,
+  inProgress: observable,
   currentCurricoo: computed,
   setCurrentCurricoo: action,
   fetchCurricoos: action,

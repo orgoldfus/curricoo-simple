@@ -19,9 +19,7 @@ class ViewCurricoo extends Component {
 
     const { curricooId } = props.match.params;
 
-    if(!props.curricoosStore.currentCurricooId) {
-      props.curricoosStore.setCurrentCurricoo(curricooId);
-    }
+    props.curricoosStore.setCurrentCurricoo(curricooId);
 
     if(!props.curricoosStore.currentCurricoo) {
       props.curricoosStore.fetchCurricoo({ curricooId });
@@ -53,9 +51,10 @@ class ViewCurricoo extends Component {
   render() {
     const { userStore, curricoosStore } = this.props;
     const { entries, currentCurricoo: curricoo } = curricoosStore;
-    const canEdit = userStore.isUserConnected && 
+    const canEdit = userStore.isUserConnected && curricoo &&
       curricoo.ownerId === userStore.currentUser.attributes.sub;
 
+    if (curricoosStore.inProgress) return null;
     return (
       !curricoo ? <h1>Curricoo was not found :(</h1> :
         <CurricooWrapper>
@@ -87,12 +86,13 @@ class ViewCurricoo extends Component {
             </Button>
           </div>
           }
+          {(userStore.isUserConnected || this.state.isCreateEntryOpen) &&
           <CreateEntryModal
             show={this.state.isCreateEntryOpen} 
             handleClose={this.handleCloseCreateEntry}
             curricooId={curricoo.id}
             newIndex={this.props.curricoosStore.entries.length + 1}
-          />
+          />}
         </CurricooWrapper>
     );
   }

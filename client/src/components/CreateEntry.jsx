@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap/lib';
-import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthentication } from '../utils/auth';
 import { inject }  from 'mobx-react';
 const ENTRY_TYPES = ['Video', 'Blog', 'Article', 'Code Repo', 'Book', 'Podcast'];
 
@@ -97,4 +97,4 @@ const ConnectedCreateEntry = inject(
   'curricoosStore',
   'userStore'
 )(CreateEntry);
-export default withAuthenticator(ConnectedCreateEntry);
+export default withAuthentication(ConnectedCreateEntry);
